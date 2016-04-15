@@ -1,25 +1,20 @@
-if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
-  echo -e "Starting to update gh-pages\n"
+#!/bin/bash
+# See https://medium.com/@nthgergo/publishing-gh-pages-with-travis-ci-53a8270e87db
+set -o errexit
 
-  #copy data we're interested in to other place
-  cp -R coverage $HOME/coverage
+rm -rf public
+mkdir public
 
-  #go to home and setup git
-  cd $HOME
-  git config --global user.email "travis@travis-ci.org"
-  git config --global user.name "Travis"
+# config
+git config --global user.email "nobody@nobody.org"
+git config --global user.name "Travis CI"
 
-  #using token clone gh-pages branch
-  git clone --quiet --branch=gh-pages https://${GH_TOKEN}@github.com/Uko/Rubidium-WHOIS.git  gh-pages > /dev/null
+# build (CHANGE THIS)
+make
 
-  #go into diractory and copy data we're interested in to that directory
-  cd gh-pages
-  cp -Rf $HOME/coverage/* .
-
-  #add, commit and push files
-  git add -f .
-  git commit -m "Travis build $TRAVIS_BUILD_NUMBER pushed to gh-pages"
-  git push -fq origin gh-pages > /dev/null
-
-  echo -e "Done magic with coverage\n"
-fi
+# deploy
+cd public
+git init
+git add .
+git commit -m "Deploy to Github Pages"
+git push --force --quiet "https://${GITHUB_TOKEN}@$github.com/${GITHUB_REPO}.git" master:gh-pages > /dev/null 2>&1
