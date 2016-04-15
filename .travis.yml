@@ -6,13 +6,5 @@ script:
 before_build:
 - carthage bootstrap
 
-after_build
+after_build:
 - zip build.zip build
-
-deploy:
-  provider: releases
-  api_key: "32f344e0366b71d1a2e55eca32922f23dc4cab29"
-  file: "build.zip"
-  skip_cleanup: true
-  on:
-    tags: true
