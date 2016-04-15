@@ -1,6 +1,11 @@
 language: objective-c
 osx_image: xcode7.3
+addons:
+  artifacts: true
+
+before_script: carthage bootstrap
+
 script:
-- gem install travis; travis encrypt -r <user>/<repository> GH_TOKEN=<token> --add env.global; carthage bootstrap; xcodebuild clean build -project AVSExample.xcodeproj
+-xcodebuild clean build -project AVSExample.xcodeproj
 
 after_success: ./update-gh-pages.sh
