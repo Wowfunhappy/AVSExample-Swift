@@ -10,3 +10,8 @@ script:
 - xcodebuild clean build -project AVSExample.xcodeproj
 
 after_success: ./update-gh-pages.sh
+
+notifications:
+  email:
+    on_success: never
+    on_failure: never
