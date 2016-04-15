@@ -8,9 +8,9 @@ import Foundation
 struct Config {
     
     struct LoginWithAmazon {
-        static let ClientId = ""
-        static let ProductId = ""
-        static let DeviceSerialNumber = ""
+        static let ClientId = "amzn1.application-oa2-client.79942e35c6e040f3947ede8b43a9e4d2"
+        static let ProductId = "123456"
+        static let DeviceSerialNumber = "123456"
     }
     
     struct Debug {
