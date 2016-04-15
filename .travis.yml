@@ -4,7 +4,7 @@ addons:
   artifacts: true
 
 
-before_script: - carthage bootstrap
+before_script: carthage bootstrap
 
 script:
 - xcodebuild clean build -project AVSExample.xcodeproj
