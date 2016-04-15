@@ -1,4 +1,18 @@
 language: objective-c
 osx_image: xcode7.3
 script:
-- carthage bootstrap; xcodebuild clean build -project AVSExample.xcodeproj
+- xcodebuild clean build -project AVSExample.xcodeproj
+
+before_build:
+- carthage bootstrap
+
+after_build
+- zip build.zip build
+
+deploy:
+  provider: releases
+  api_key: "32f344e0366b71d1a2e55eca32922f23dc4cab29"
+  file: "build.zip"
+  skip_cleanup: true
+  on:
+    tags: true
